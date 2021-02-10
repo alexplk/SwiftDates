@@ -5,19 +5,19 @@ import Foundation
 /// Components
 public extension Date {
     /// Returns set of common date components
-    public static var commonComponents: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
+    static var commonComponents: Set<Calendar.Component> = [.year, .month, .day, .hour, .minute, .second]
     
     /// Returns set of exhaustive date components
-    public static var allComponents: Set<Calendar.Component> = [.era, .year, .month, .day, .hour, .minute, .second, .weekday, .weekdayOrdinal, .quarter, .weekOfMonth, .weekOfYear, .yearForWeekOfYear, .nanosecond, .calendar, .timeZone]
+    static var allComponents: Set<Calendar.Component> = [.era, .year, .month, .day, .hour, .minute, .second, .weekday, .weekdayOrdinal, .quarter, .weekOfMonth, .weekOfYear, .yearForWeekOfYear, .nanosecond, .calendar, .timeZone]
     
     /// Returns set of MDY date components
-    public static var dateComponents: Set<Calendar.Component> = [.year, .month, .day]
+    static var dateComponents: Set<Calendar.Component> = [.year, .month, .day]
     
     /// Returns set of HMS
-    public static var timeComponents: Set<Calendar.Component> = [.hour, .minute, .second, ]
+    static var timeComponents: Set<Calendar.Component> = [.hour, .minute, .second, ]
     
     /// Returns set of MDYHMS components
-    public static var dateAndTimeComponents: Set<Calendar.Component> = [.hour, .minute, .second, .year, .month, .day]
+    static var dateAndTimeComponents: Set<Calendar.Component> = [.hour, .minute, .second, .year, .month, .day]
 }
 
 /// Components from Dates
@@ -39,10 +39,10 @@ public extension Date {
     }
     
     /// Extracts common date components for date
-    public var components: DateComponents { return Date.sharedCalendar.dateComponents(Date.commonComponents, from: self) }
+    var components: DateComponents { return Date.sharedCalendar.dateComponents(Date.commonComponents, from: self) }
     
     /// Extracts all date components for date
-    public var allComponents: DateComponents { return Date.sharedCalendar.dateComponents(Date.allComponents, from: self) }
+    var allComponents: DateComponents { return Date.sharedCalendar.dateComponents(Date.allComponents, from: self) }
 }
 
 
@@ -93,8 +93,8 @@ extension Date {
         case .weekOfYear: newComponent = DateComponents(weekOfYear: count)
         case .yearForWeekOfYear: newComponent = DateComponents(yearForWeekOfYear: count)
         case .nanosecond: newComponent = DateComponents(nanosecond: count)
-            // These items complete the component vocabulary but cannot be used in this way
-            // case .calendar: newComponent = DateComponents(calendar: count)
+        // These items complete the component vocabulary but cannot be used in this way
+        // case .calendar: newComponent = DateComponents(calendar: count)
         // case .timeZone: newComponent = DateComponents(timeZone: count)
         default: break
         }
@@ -125,7 +125,7 @@ extension DateComponents {
         case .weekOfYear: return weekOfYear
         case .yearForWeekOfYear: return yearForWeekOfYear
         case .nanosecond: return nanosecond
-            // case .calendar: return self.calendar
+        // case .calendar: return self.calendar
         // case .timeZone: return self.timeZone
         default: return nil
         }
@@ -158,7 +158,7 @@ extension DateComponents {
         // the values return Int.max
         func validateMember(_ value: Int?) -> Bool {
             guard let value = value, value != Int.max, value != Int.min
-                else { return false }
+            else { return false }
             return true
         }
         
@@ -192,8 +192,8 @@ extension DateComponents {
             // Error workaround where instead of returning nil
             // the values return Int.max
             guard let value = value(for: component),
-                value != Int.max, value != Int.min
-                else { continue }
+                  value != Int.max, value != Int.min
+            else { continue }
             if value != 0 { copy.setValue(value, for: component) }
         }
         return copy
@@ -238,7 +238,7 @@ extension DateComponents {
         remaining: Bool = false,
         approximate: Bool = false,
         style: PresentationStyle = .standard
-        ) -> String {
+    ) -> String {
         
         let formatter: DateComponentsFormatter = {
             $0.calendar = Date.sharedCalendar
@@ -280,7 +280,7 @@ extension DateComponents {
         }
         
         guard let string = formatter.string(from: self)
-            else { return "\(self)" }
+        else { return "\(self)" }
         return string
     }
 }
