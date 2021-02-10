@@ -13,6 +13,14 @@ public extension Date {
     static var iso8601Formatter: ISO8601DateFormatter = {
         $0.timeZone = TimeZone.autoupdatingCurrent
         return $0 }(ISO8601DateFormatter())
+    @available(watchOS 3.0, *)
+    @available(tvOS 10.0, *)
+    @available(iOS 10.0, *)
+    @available(OSX 10.12, *)
+    static var isoDateFormatter: ISO8601DateFormatter = {
+        $0.timeZone = TimeZone.autoupdatingCurrent
+        $0.formatOptions = .withFullDate
+        return $0 }(ISO8601DateFormatter())
     /// Returns a short style date formatter
     static var shortDateFormatter: DateFormatter = {
         $0.dateStyle = .short; return $0 }(DateFormatter())
@@ -45,6 +53,12 @@ public extension Date {
     @available(OSX 10.12, *)
     var iso8601String: String { return Date.iso8601Formatter.string(from: self) }
     
+    @available(watchOS 3.0, *)
+    @available(tvOS 10.0, *)
+    @available(iOS 10.0, *)
+    @available(OSX 10.12, *)
+    var isoDateString: String { return Date.isoDateFormatter.string(from: self) }
+
     /// Returns date components as short string
     var shortDateString: String { return Date.shortDateFormatter.string(from:self) }
     /// Returns date components as medium string
